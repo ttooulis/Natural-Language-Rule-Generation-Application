@@ -1,0 +1,10 @@
+<NLRG>
+    <Annotators>tokenize, ssplit, pos, depparse, lemma, ner</Annotators>
+    <ssplit.eolonly>true</ssplit.eolonly>
+	<NeckSymbol>implies</NeckSymbol>
+	<MetaKBType>prudens</MetaKBType>
+	<GenerateName>0</GenerateName>
+	<PredicateNameConcatChar></PredicateNameConcatChar>
+	<PredicateNameCapitalize>1</PredicateNameCapitalize>
+	<MetaKBFile>MetaLevel-Translation-KB-ForApp-v.2.0.prudens</MetaKBFile>
+</NLRG>
