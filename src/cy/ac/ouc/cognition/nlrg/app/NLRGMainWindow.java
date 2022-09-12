@@ -34,12 +34,12 @@ public class NLRGMainWindow {
 		NEW_INSTRUCTION,
 		NL_PARSED,
 		PREDICATES_GENERATED,
-		QUERY_GENERATED,
+		CONTEXT_GENERATED,
 		RULE_GENERATED
 	}
 
 	
-	//private static final int NLP_NOT_LOADED = (-2), NLP_LOADED = (-1), NEW_INSTRUCTION = 0, NL_PARSED = 1, PREDICATES_GENERATED = 2, QUERY_GENERATED = 3, RULE_GENERATED = 4;
+	//private static final int NLP_NOT_LOADED = (-2), NLP_LOADED = (-1), NEW_INSTRUCTION = 0, NL_PARSED = 1, PREDICATES_GENERATED = 2, CONTEXT_GENERATED = 3, RULE_GENERATED = 4;
 	private static int MKB_NOT_LOADED = 0, MKB_LOADED = 1;
 	
     private static String ls = NLRGParameterApp.NLRGThing_LineSeperator;
@@ -59,8 +59,8 @@ public class NLRGMainWindow {
 	private static Button btnViewPredicates;
 	private static Button btnGeneratePredicates;
 	
-	private static Button btnViewQuery;
-	private static Button btnGenerateQuery;
+	private static Button btnViewContext;
+	private static Button btnGenerateContext;
 	private static Button btnGenerateRule;
 	
 	private static Button btnAddRuleToKB;
@@ -154,8 +154,8 @@ public class NLRGMainWindow {
     			btnViewParseData.setEnabled(false);
     			btnGeneratePredicates.setEnabled(false);
     			btnViewPredicates.setEnabled(false);
-    			btnGenerateQuery.setEnabled(false);
-    			btnViewQuery.setEnabled(false);
+    			btnGenerateContext.setEnabled(false);
+    			btnViewContext.setEnabled(false);
     			btnGenerateRule.setEnabled(false);
     			btnAddRuleToKB.setEnabled(false);
     			break;
@@ -166,8 +166,8 @@ public class NLRGMainWindow {
     			btnViewParseData.setEnabled(false);
     			btnGeneratePredicates.setEnabled(true);
     			btnViewPredicates.setEnabled(false);
-    			btnGenerateQuery.setEnabled(true);
-    			btnViewQuery.setEnabled(false);
+    			btnGenerateContext.setEnabled(true);
+    			btnViewContext.setEnabled(false);
     			btnGenerateRule.setEnabled(true);
     			btnAddRuleToKB.setEnabled(false);
     			break;
@@ -177,8 +177,8 @@ public class NLRGMainWindow {
     			btnViewParseData.setEnabled(true);
     			btnGeneratePredicates.setEnabled(true);
     			btnViewPredicates.setEnabled(false);
-    			btnGenerateQuery.setEnabled(true);
-    			btnViewQuery.setEnabled(false);
+    			btnGenerateContext.setEnabled(true);
+    			btnViewContext.setEnabled(false);
     			btnGenerateRule.setEnabled(true);
     			btnAddRuleToKB.setEnabled(false);
     			break;
@@ -188,19 +188,19 @@ public class NLRGMainWindow {
     			btnViewParseData.setEnabled(true);
     			btnGeneratePredicates.setEnabled(false);
     			btnViewPredicates.setEnabled(true);
-    			btnGenerateQuery.setEnabled(true);
-    			btnViewQuery.setEnabled(false);
+    			btnGenerateContext.setEnabled(true);
+    			btnViewContext.setEnabled(false);
     			btnGenerateRule.setEnabled(true);
     			btnAddRuleToKB.setEnabled(false);
     			break;
 
-			case QUERY_GENERATED:
+			case CONTEXT_GENERATED:
     			btnNlParseText.setEnabled(false);
     			btnViewParseData.setEnabled(true);
     			btnGeneratePredicates.setEnabled(false);
     			btnViewPredicates.setEnabled(true);
-    			btnGenerateQuery.setEnabled(true);
-    			btnViewQuery.setEnabled(true);
+    			btnGenerateContext.setEnabled(true);
+    			btnViewContext.setEnabled(true);
     			btnGenerateRule.setEnabled(true);
     			btnAddRuleToKB.setEnabled(false);
     			break;
@@ -210,8 +210,8 @@ public class NLRGMainWindow {
     			btnViewParseData.setEnabled(true);
     			btnGeneratePredicates.setEnabled(false);
     			btnViewPredicates.setEnabled(true);
-    			btnGenerateQuery.setEnabled(false);
-    			btnViewQuery.setEnabled(true);
+    			btnGenerateContext.setEnabled(false);
+    			btnViewContext.setEnabled(true);
     			btnGenerateRule.setEnabled(true);
     			btnAddRuleToKB.setEnabled(true);
     			break;
@@ -221,8 +221,8 @@ public class NLRGMainWindow {
     			btnViewParseData.setEnabled(false);
     			btnGeneratePredicates.setEnabled(false);
     			btnViewPredicates.setEnabled(false);
-    			btnGenerateQuery.setEnabled(false);
-    			btnViewQuery.setEnabled(false);
+    			btnGenerateContext.setEnabled(false);
+    			btnViewContext.setEnabled(false);
     			btnGenerateRule.setEnabled(false);
     			btnAddRuleToKB.setEnabled(false);
     			break;
@@ -457,8 +457,8 @@ public class NLRGMainWindow {
         	    try {
         	        if (currentPipeLineState.ordinal() >= PipeLineState.PREDICATES_GENERATED.ordinal()) {
 
-    	        		Files.write(Paths.get(NLRGParameterApp.NLRGPipeline_MetaPredicatesFile), NLRGPipe.getMetaPredicateTextData().getBytes());
-        	        	Program.launch(NLRGParameterApp.NLRGPipeline_MetaPredicatesFile);
+    	        		Files.write(Paths.get(NLRGParameterApp.NLRGPipeline_PredicatesFile), NLRGPipe.getMetaPredicateTextData().getBytes());
+        	        	Program.launch(NLRGParameterApp.NLRGPipeline_PredicatesFile);
         	        }
         	        else {
         		        MessageBox m = new MessageBox(shlRuleGeneration);
@@ -473,7 +473,7 @@ public class NLRGMainWindow {
          	    }
     		}
     	});
-    	btnViewPredicates.setText("View Meta-Predicates");
+    	btnViewPredicates.setText("View Predicates");
     	
     	btnGeneratePredicates = new Button(grpPredicatesControls, SWT.NONE);
     	btnGeneratePredicates.addSelectionListener(new SelectionAdapter() {
@@ -519,7 +519,7 @@ public class NLRGMainWindow {
     		}
     	});
     	btnGeneratePredicates.setEnabled(false);
-    	btnGeneratePredicates.setText("Generate Meta-Predicates");
+    	btnGeneratePredicates.setText("Generate Predicates");
     	
     	@SuppressWarnings("unused")
 		Label lblGrpPredicatesFiller = new Label(grpPredicatesControls, SWT.NONE);
@@ -528,33 +528,33 @@ public class NLRGMainWindow {
     	grpGenerateControls.setText("Rule Generation");
     	grpGenerateControls.setLayout(new FillLayout(SWT.VERTICAL));
     	
-    	btnViewQuery = new Button(grpGenerateControls, SWT.NONE);
-    	btnViewQuery.addSelectionListener(new SelectionAdapter() {
+    	btnViewContext = new Button(grpGenerateControls, SWT.NONE);
+    	btnViewContext.addSelectionListener(new SelectionAdapter() {
     		@Override
     		public void widgetSelected(SelectionEvent e) {
         	    try {
-        	        if (currentPipeLineState.ordinal() >= PipeLineState.QUERY_GENERATED.ordinal()) {
-        	        	Files.write(Paths.get(NLRGParameterApp.NLRGPipeline_MetaQueryFile), NLRGPipe.getMetaQueryTextData().getBytes());
-        	        	Program.launch(NLRGParameterApp.NLRGPipeline_MetaQueryFile);
+        	        if (currentPipeLineState.ordinal() >= PipeLineState.CONTEXT_GENERATED.ordinal()) {
+        	        	Files.write(Paths.get(NLRGParameterApp.NLRGPipeline_ContextFile), NLRGPipe.getSentencesContextTextData().getBytes());
+        	        	Program.launch(NLRGParameterApp.NLRGPipeline_ContextFile);
         	        }
         	        else {
         		        MessageBox m = new MessageBox(shlRuleGeneration);
-        		        m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot show query! (MSG009-1)");
+        		        m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot show context! (MSG009-1)");
         		        m.open();            	
         	        }
         	    }
         	    catch(Exception e2) {
     		        MessageBox m = new MessageBox(shlRuleGeneration);
-    		        m.setMessage("Error: Cannot show query! (MSG009-2)" + ls + e2.getMessage());
+    		        m.setMessage("Error: Cannot show context! (MSG009-2)" + ls + e2.getMessage());
     		        m.open();            	
          	    }
     		}
     	});
-    	btnViewQuery.setEnabled(false);
-    	btnViewQuery.setText("View Context");
+    	btnViewContext.setEnabled(false);
+    	btnViewContext.setText("View Context");
     	
-    	btnGenerateQuery = new Button(grpGenerateControls, SWT.NONE);
-    	btnGenerateQuery.addSelectionListener(new SelectionAdapter() {
+    	btnGenerateContext = new Button(grpGenerateControls, SWT.NONE);
+    	btnGenerateContext.addSelectionListener(new SelectionAdapter() {
     		@Override
     		public void widgetSelected(SelectionEvent e) {
     			PipeLineState prevPipeLineState = currentPipeLineState;
@@ -572,8 +572,8 @@ public class NLRGMainWindow {
     	        		if (currentPipeLineState.ordinal() < PipeLineState.PREDICATES_GENERATED.ordinal())
 	    	        		NLRGPipe.generateMetaPredicates();
 
-    	        		NLRGPipe.buildMetaQueries();
-    	        		AdjustControlState(PipeLineState.QUERY_GENERATED);
+    	        		NLRGPipe.buildSentencesContext();
+    	        		AdjustControlState(PipeLineState.CONTEXT_GENERATED);
     	        	}
 
      	        	else if (instructionText == null || instructionText == "") {
@@ -586,20 +586,20 @@ public class NLRGMainWindow {
     	        	else {
 		        		AdjustControlState(prevPipeLineState);
     		        	MessageBox m = new MessageBox(shlRuleGeneration);
-    		        	m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot generate query! (MSG010-2)");
+    		        	m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot generate context! (MSG010-2)");
     		        	m.open();            	   	        		
     	        	}
     	        }
     	        catch(Exception e2) {
 	        		AdjustControlState(prevPipeLineState);
 		        	MessageBox m = new MessageBox(shlRuleGeneration);
-		        	m.setMessage("Error: Cannot parse, generate predicates or query! (MSG010-3)" + ls + e2.getMessage());
+		        	m.setMessage("Error: Cannot parse, generate predicates or context! (MSG010-3)" + ls + e2.getMessage());
 		        	m.open();            	
      	        }
     		}
     	});
-    	btnGenerateQuery.setText("Generate Context");
-    	btnGenerateQuery.setEnabled(false);
+    	btnGenerateContext.setText("Generate Context");
+    	btnGenerateContext.setEnabled(false);
     	
     	btnGenerateRule = new Button(grpGenerateControls, SWT.CENTER);
     	btnGenerateRule.setEnabled(false);
@@ -623,10 +623,10 @@ public class NLRGMainWindow {
     	        		if (currentPipeLineState.ordinal() < PipeLineState.PREDICATES_GENERATED.ordinal())
 	    	        		NLRGPipe.generateMetaPredicates();
 
-    	        		if (currentPipeLineState.ordinal() < PipeLineState.QUERY_GENERATED.ordinal())
-        	        		NLRGPipe.buildMetaQueries();
+    	        		if (currentPipeLineState.ordinal() < PipeLineState.CONTEXT_GENERATED.ordinal())
+        	        		NLRGPipe.buildSentencesContext();
     	        		
-    	        		NLRGPipe.runMetaQueries(null);	        		
+    	        		NLRGPipe.extractRules(null);	        		
     	        		txtGeneratedRule.setText(NLRGPipe.buildExtractedRules());
     	        		AdjustControlState(PipeLineState.RULE_GENERATED);
     	        	    
@@ -642,14 +642,14 @@ public class NLRGMainWindow {
     	        	else {
 		        		AdjustControlState(prevPipeLineState);
     		        	MessageBox m = new MessageBox(shlRuleGeneration);
-    		        	m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot generate query! (MSG011-5)");
+    		        	m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot generate context! (MSG011-5)");
     		        	m.open();            	   	        		
     	        	}
     	        }
     	        catch(Exception e2) {
 	        		AdjustControlState(prevPipeLineState);
 		        	MessageBox m = new MessageBox(shlRuleGeneration);
-		        	m.setMessage("Error: Cannot parse, generate predicates or query and rule! (MSG011-6)" + ls + e2.toString());
+		        	m.setMessage("Error: Cannot parse, generate predicates or context and rule! (MSG011-6)" + ls + e2.toString());
 		        	m.open();            	
      	        }
 
@@ -694,7 +694,7 @@ public class NLRGMainWindow {
         	        }
         	        else {
 			        	MessageBox m = new MessageBox(shlRuleGeneration);
-			        	m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot generate query! (MSG012-1)");
+			        	m.setMessage("Wrong pipeline state (" + currentPipeLineState + "): Cannot generate context! (MSG012-1)");
 			        	m.open();
         	        }
 				} catch (IOException e1) {

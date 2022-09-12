@@ -12,8 +12,8 @@ public class NLRGParameterApp extends NLRGParameter {
 	 ********************************/
 	public static String NLRGThing_LineSeperator = System.getProperty("line.separator");
 	public static String NLRGPipeline_ParseDataFile = "ParseData.txt";
-	public static String NLRGPipeline_MetaPredicatesFile = "Predicates.txt";
-	public static String NLRGPipeline_MetaQueryFile = "Query.txt";
+	public static String NLRGPipeline_PredicatesFile = "Predicates.txt";
+	public static String NLRGPipeline_ContextFile = "Context.txt";
 
 	
 	public static void Load(String settingsFile) {
@@ -24,8 +24,8 @@ public class NLRGParameterApp extends NLRGParameter {
 
 		NLRGThing_LineSeperator = ReadParameterTrace("LineSeperator", System.getProperty("line.separator"));
 		NLRGPipeline_ParseDataFile = ReadParameterTrace("ParseDataFile", "ParseData.txt");
-		NLRGPipeline_MetaPredicatesFile = ReadParameterTrace("MetaPredicatesFile", "Predicates.txt");
-		NLRGPipeline_MetaQueryFile = ReadParameterTrace("MetaQueryFile", "Query.txt");
+		NLRGPipeline_PredicatesFile = ReadParameterTrace("PredicatesFile", "Predicates.txt");
+		NLRGPipeline_ContextFile = ReadParameterTrace("ContextFile", "Context.txt");
 		
 		outln(NLRGTrace.TraceLevel.IMPORTANT, "NLRG App Parameters Set!");
 	}
