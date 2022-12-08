@@ -1,0 +1,38 @@
+Version ::
+	metakbinfo(version) implies metakbinfo_data('NESTOR Demonstration');
+
+E001_Clause_ToBe ::
+    cop(W1, P1, be, _),
+    nsubj(W1, P1, W2, P2) implies
+    clause_tobe(W1, P1, W2, P2);
+
+E002_Cons_ToBe ::
+    root(root, 0, W1, P1),
+    clause_tobe(W1, P1, W2, P2) implies
+    ruleterms(  head, 0,
+                W1, args, vph-1, next,
+                W2, args, vph-1);
+
+E003_Ant_ToBe ::
+    advcl(_, _, W1, P1),
+    clause_tobe(W1, P1, W2, P2) implies
+    ruleterms(  body, 1, W1,
+                args, vph-1, next,
+                W2, args, vph-1);
+
+E004_Cons_ToBe_NER ::
+    root(root, 0, W1, P1),
+    token(_, _, ner, _, W2, P2),
+    clause_tobe(W1, P1, W2, P2) implies
+    ruleterms(head, 0, W1, args, W2);
+
+E005_Ant_ToBe_NER ::
+    advcl(_, _, W1, P1),
+    token(_, _, ner, _, W2, P2),
+    clause_tobe(W1, P1, W2, P2) implies
+    ruleterms(body, 1, W1, args, W2);
+
+E006_Clause_ToBe_Verb ::
+    aux(W1, P1, be, _),
+    nsubj(W1, P1, W2, P2) implies
+    clause_tobe(W1, P1, W2, P2);
